@@ -82,9 +82,11 @@ MAX_WORKERS = 16
 # ============================================================
 # OUTPUT STRUCTURE
 # ============================================================
-CACHE_DIR = "./iga_cache"
-SNAPSHOT_DIR = "./IGA scraped product"
-IMAGES_ROOT_DIR = "./images"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CACHE_DIR = os.path.join(BASE_DIR, "iga_cache")
+SNAPSHOT_DIR = os.path.join(BASE_DIR, "iga_scraped_product")
+IMAGES_ROOT_DIR = os.path.join(BASE_DIR, "images")
 
 os.makedirs(CACHE_DIR, exist_ok=True)
 os.makedirs(SNAPSHOT_DIR, exist_ok=True)
@@ -378,7 +380,7 @@ def load_or_create_run_id() -> str:
 
 
 def snapshot_paths(run_id: str) -> Tuple[str, str]:
-    csv_path = os.path.join(SNAPSHOT_DIR, f"iga_all_products_{run_id}.csv")
+    csv_path = os.path.join(BASE_DIR, f"iga_all_products_{run_id}.csv")
     jsonl_path = os.path.join(SNAPSHOT_DIR, f"iga_all_products_{run_id}.jsonl")
     return csv_path, jsonl_path
 
